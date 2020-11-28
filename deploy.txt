@@ -1,0 +1,70 @@
+instruction for deploy
+
+
+------------------
+adduser username
+usermod -aG sudo username
+group username
+su username
+
+
+---------------
+
+Create database
+-----------------------------
+
+
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev
+sudo apt-get install -y libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm
+sudo apt-get install -y libncurses5-dev  libncursesw5-dev xz-utils tk-dev
+
+wget https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tgz
+tar xvf Python-3.6.4.tgz
+cd Python-3.6.4
+./configure --enable-optimizations
+make -j8
+sudo make altinstall
+python3.6
+
+----------------------------------------------
+
+
+settings nginx without ssl
+--------------
+server {
+    listen 80;
+    server_name 111.222.333.44; # write domen or Ip-adress
+    access_log  /var/log/nginx/example.log;
+ 
+    location /static/ {
+        root /home/user/myprojectenv/myproject/myproject/; #write directory
+        expires 30d;
+    }
+ 
+    location / {
+        proxy_pass http://127.0.0.1:8000; 
+        proxy_set_header Host $server_name;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+
+sudo service nginx restart
+
+------------------------------------------
+settings supervisor
+---------------------------------------
+
+
+
+cd /etc/supervisor/conf.d/
+sudo update-rc.d supervisor enable
+sudo service supervisor start
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl status project
+sudo supervisorctl restart project
+
+
+
+--------------------
