@@ -30,7 +30,7 @@ save id of poll , to get questions.
 
 ## Get question in poll
 
-to get questions from poll , you need to sen get request  from :
+to get questions from poll , you need to send get request  to :
 
 ```
 http://127.0.0.1:8080/api/v1/poll/{id}
@@ -149,9 +149,9 @@ required field is 'user_id' and 'pool'.
 
 The type of feild 'answer'  must list.
 
-if type of question is "one_answer" , the 'answer_choosed' must be integer and must be from test answer , otherwide will not accept your answer.
+if type of question is "one_answer" , the 'answer_choosed' must be integer and  must be include test answer , otherwise will not accept your answer.
 
-if type of question is "many_answers" , the 'answer_choosed' must be list od integer and must be from test answer , otherwide will not accept your answer.
+if type of question is "many_answers" , the 'answer_choosed' must be list od integer and must be include test answer , otherwise will not accept your answer.
 
 ## Information about answers
 
@@ -162,7 +162,7 @@ http://127.0.0.1:8080/api/v1/userpoll/{user_id}
 
 user_is is your user id
 
-requset'll return you dictinary , in key 'data' will be all inforamation , 
+requset'll return you dictionary , in key 'data' will be all inforamation , 
 like that :
 
 ```json
